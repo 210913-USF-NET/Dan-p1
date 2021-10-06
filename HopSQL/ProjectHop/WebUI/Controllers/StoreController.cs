@@ -64,6 +64,7 @@ namespace WebUI.Controllers
         // GET: StoreController/Edit/5
         public ActionResult Edit(int id)
         {
+
             return View();
         }
 
@@ -74,6 +75,41 @@ namespace WebUI.Controllers
         {
             try
             {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: StoreController/Editbeer/5
+        public ActionResult EditBeer(int BeerId)
+        {
+            List<Beer> beero = _bl.GetAllBeers();
+
+            return View(beero[BeerId - 1]);
+        }
+
+        // POST: StoreController/Editbeer/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditBeer(int Id, Beer beer)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    List<Beer> beeros = _bl.GetAllBeers();
+                    Beer beertochange = beeros[Id - 1];
+
+                    int toadd = beer.Stock;
+
+                    Debug.WriteLine(beer);
+                    Debug.WriteLine($"id = {Id}");
+
+                    _bl.UpdateInventory(toadd, beertochange);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

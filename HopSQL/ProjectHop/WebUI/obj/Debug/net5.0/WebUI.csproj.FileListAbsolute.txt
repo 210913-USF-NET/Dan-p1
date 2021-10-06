@@ -136,3 +136,4 @@ C:\Users\Dan\Desktop\html\HopSQL\ProjectHop\WebUI\obj\Debug\net5.0\Razor\Views\C
 C:\Users\Dan\Desktop\html\HopSQL\ProjectHop\WebUI\obj\Debug\net5.0\Razor\Views\Customer\Create.cshtml.g.cs
 C:\Users\Dan\Desktop\html\HopSQL\ProjectHop\WebUI\obj\Debug\net5.0\Razor\Views\Beer\Index.cshtml.g.cs
 C:\Users\Dan\Desktop\html\HopSQL\ProjectHop\WebUI\obj\Debug\net5.0\Razor\Views\Store\Beer.cshtml.g.cs
+C:\Users\Dan\Desktop\html\HopSQL\ProjectHop\WebUI\obj\Debug\net5.0\Razor\Views\Store\EditBeer.cshtml.g.cs
