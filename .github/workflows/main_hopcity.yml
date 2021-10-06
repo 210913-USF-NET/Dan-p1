@@ -9,8 +9,8 @@ on:
       - main
   workflow_dispatch:
   
-  env:
-    WORKING_DIRECTORY: HopSQL/ProjectHop
+env:
+  WORKING_DIRECTORY: HopSQL/ProjectHop
 
 jobs:
   build:
