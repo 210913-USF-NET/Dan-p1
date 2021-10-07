@@ -30,9 +30,7 @@ jobs:
         with:
           dotnet-version: '5.0.x'
           include-prerelease: true
-                   
-      - name: Build with dotnet
-        run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration Release  
+             
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
@@ -52,11 +50,17 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          
+      - name: Restore
+        run: dotnet restore ${{ env.WORKING_DIRECTORY }}
+      - name: Test
+        run: dotnet test ${{ env.WORKING_DIRECTORY }} --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+
       
       - name: Build and analyze
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"210913-USF-NET_DanP0" /o:"210913-usf-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"210913-USF-NET_DanP0" /o:"210913-usf-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.exclusions="**/WebUI/wwwroot/lib/**" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
           dotnet build ${{ env.WORKING_DIRECTORY }} --configuration Release
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
     
