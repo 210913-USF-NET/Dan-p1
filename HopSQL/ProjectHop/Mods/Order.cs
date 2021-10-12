@@ -15,9 +15,28 @@ namespace Mods
         {get; set;}
 
         //public string DateNoTime = this.GetDateNoTime();
-
+        
+        private int _quantity;
         public int Quantity
-        {get; set;}
+        {
+            get
+            {
+                return _quantity;
+            } 
+            set
+            {
+                
+                if(value != 0)
+                {
+                    _quantity = value;
+                }
+                else
+                {
+                    InputInvalidException e = new InputInvalidException("Quantity must not be 0");
+                    throw e;
+                }
+            }
+        }
 
         public Mods.Beer SelectedBeer
         {get; set;}

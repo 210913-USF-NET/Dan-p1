@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+// using Serilog;
 
 namespace Mods
 {
@@ -13,8 +15,27 @@ namespace Mods
         public int Code
         {get; set;}
 
+        private string _name;
+
         public string Name
-        {get; set;}
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if(value.Length == 0)
+                {
+                    InputInvalidException e = new InputInvalidException("Customer name can't be empty");
+                    throw e;
+                }
+                else
+                {
+                    _name = value;
+                }
+            }
+        }
 
         public bool IsManager
         {get; set;}
