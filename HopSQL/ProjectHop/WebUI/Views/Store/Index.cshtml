@@ -29,7 +29,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                <marquee>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </marquee>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -38,10 +40,11 @@
                 @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Beer", "Beer", new { stoid=item.Id })
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Beer selection", "Beer", new { stoid=item.Id }) |
+                @Html.ActionLink("View orders for this store", "ViewOrders", new { stoid=item.Id})
                 <p></p>
 
             </td>

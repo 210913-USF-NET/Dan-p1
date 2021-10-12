@@ -1,18 +1,15 @@
 ﻿@model IEnumerable<Mods.Customer>
 
 @{
-    ViewData["Title"] = "Customer";
+    ViewData["Title"] = "List";
 }
 
-<h1>Welcome Customer</h1>
+<h1>Customers</h1>
 
-<p>
-    <a asp-action="Create">Sign Up</a>
-</p>
-<p>
-    <a asp-action="Login">Login</a>
-</p>
-@*<table class="table">
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -46,11 +43,12 @@
                 @Html.DisplayFor(modelItem => item.IsManager)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                @Html.ActionLink("View Orders", "Orders", new { custoid=item.Id })
             </td>
         </tr>
 }
     </tbody>
-</table>*@
+</table>

@@ -14,11 +14,16 @@ namespace Mods
         public System.DateTime Date 
         {get; set;}
 
+        //public string DateNoTime = this.GetDateNoTime();
+
         public int Quantity
         {get; set;}
 
         public Mods.Beer SelectedBeer
         {get; set;}
+
+        public int SelectedBeerId
+        { get; set; }
 
         public int CustomerIndex
         {get; set;}
@@ -44,9 +49,14 @@ namespace Mods
             return TotalPrice;
         }
 
+        public string GetDateNoTime()
+        {
+            return this.Date.ToString("MM/dd/yyyy");
+        }
+
         public override string ToString()
         {
-            return $" Date: {Date.ToString("MM/dd/yyyy")} CustomerId: {CustomerIndex + 1} \n      Beer: {SelectedBeer.Name}-${SelectedBeer.Price} Quantity: {Quantity}\n";
+            return $" Date: {Date.ToString("MM/dd/yyyy")}  |   Customer Id: {CustomerIndex + 1} \n   |   Beer: {SelectedBeer.Name}-${SelectedBeer.Price}   |  Quantity: {Quantity}    |  Total: ${GetTotal()} \n";
         }
         
     }

@@ -12,6 +12,8 @@ namespace Mods
         public int Quantity { get; set; }
         public int BeersId { get; set; }
 
+        public int BeerId { get; set; }
+
         public Beer Beer { get; set; }
     }
 }

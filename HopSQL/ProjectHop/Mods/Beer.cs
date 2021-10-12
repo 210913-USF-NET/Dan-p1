@@ -18,6 +18,12 @@ namespace Mods
 
         public Store store { get; set; }
 
+        public int storeId { get; set; }
+        //public int GetStoreId()
+        //{
+        //    return this.store.Id;
+        //}
+
         public override string ToString()
         {
             return $"Beer: {Name} inventory: {Stock} price: ${Price}";

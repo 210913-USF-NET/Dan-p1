@@ -62,7 +62,8 @@ namespace Data
                 Id = beer.Id,
                 Name = beer.Name,
                 Price = (decimal)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(p => p.Price).ToArray()[0],
-                Stock = (int)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(s => s.Stock).ToArray()[0]
+                Stock = (int)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(s => s.Stock).ToArray()[0],
+                storeId = beer.storeId
 
             }).ToList();
         }
@@ -76,27 +77,33 @@ namespace Data
                 Id = beer.Id,
                 Name = beer.Name,
                 Price = (decimal)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(p => p.Price).ToArray()[0],
-                Stock = (int)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(s => s.Stock).ToArray()[0]
-
+                Stock = (int)_context.Inventories.Where(invo => invo.BeersId == beer.Id).Select(s => s.Stock).ToArray()[0],
+                storeId = beer.storeId
             }).ToList();
         }
 
         public Order AddOrder(Order ordo, int custoindex)
         {
-            LineItem linotoadd = new LineItem(){
+            
+            LineItem linotoadd = new LineItem() {
                 Quantity = ordo.Quantity,
-                BeersId = ordo.SelectedBeer.Id
-
+                BeersId = ordo.SelectedBeer.Id,
+                BeerId = ordo.SelectedBeer.Id
+                //Beer = ordo.SelectedBeer
             };
 
             _context.Add(linotoadd);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            Order ordotoadd = new Order(){
-                CustomerId  = custoindex + 1,
+            Order ordotoadd = new Order() {
+                CustomerId = custoindex + 1,
                 LineItemId = linotoadd.Id,
-                Date = DateTime.Today
+                Date = DateTime.Today,
+                SelectedBeerId = ordo.SelectedBeer.Id,
+                Quantity = ordo.Quantity,
+                CustomerIndex = custoindex,
+                StoresId = ordo.SelectedBeer.storeId
             };
 
             _context.Add(ordotoadd);
@@ -132,8 +139,9 @@ namespace Data
                 Quantity = (int)_context.LineItems.Where(lino => lino.Id == ordo.LineItem.Id).Select(q => q.Quantity).ToArray()[0],
                 SelectedBeer = obeers[(int)_context.LineItems.Where(lino => lino.Id == ordo.LineItem.Id).Select(b => b.BeersId).ToArray()[0] - 1],
                 CustomerIndex = ordo.Customer.Id - 1,
-                StoresId = (int)_context.LineItems.Where(sto => sto.Id == ordo.LineItem.Id).Select(i => i.Beer.store.Id).ToArray()[0]
-
+                StoresId = (int)_context.Orders.Where(sto => sto.Id == ordo.Id).Select(i => i.SelectedBeer.store.Id).ToArray()[0], //i.beer or lineitem.beer is null
+                CustomerId = ordo.CustomerId,
+                LineItemId = ordo.LineItemId
 
             }).ToList();
         }
