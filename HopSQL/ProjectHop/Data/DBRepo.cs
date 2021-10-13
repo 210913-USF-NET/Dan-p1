@@ -96,13 +96,15 @@ namespace Data
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
+            System.Diagnostics.Debug.WriteLine($"customer Id = {custoindex}");
+
             Order ordotoadd = new Order() {
-                CustomerId = custoindex + 1,
+                CustomerId = custoindex,
                 LineItemId = linotoadd.Id,
                 Date = DateTime.Today,
                 SelectedBeerId = ordo.SelectedBeer.Id,
                 Quantity = ordo.Quantity,
-                CustomerIndex = custoindex,
+                CustomerIndex = 0,
                 StoresId = ordo.SelectedBeer.storeId
             };
 
@@ -138,7 +140,7 @@ namespace Data
                 Date = ordo.Date,
                 Quantity = (int)_context.LineItems.Where(lino => lino.Id == ordo.LineItem.Id).Select(q => q.Quantity).ToArray()[0],
                 SelectedBeer = obeers[(int)_context.LineItems.Where(lino => lino.Id == ordo.LineItem.Id).Select(b => b.BeersId).ToArray()[0] - 1],
-                CustomerIndex = ordo.Customer.Id - 1,
+                //CustomerIndex = ordo.CustomerIndex,
                 StoresId = (int)_context.Orders.Where(sto => sto.Id == ordo.Id).Select(i => i.SelectedBeer.store.Id).ToArray()[0], //i.beer or lineitem.beer is null
                 CustomerId = ordo.CustomerId,
                 LineItemId = ordo.LineItemId

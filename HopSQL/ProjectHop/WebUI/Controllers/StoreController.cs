@@ -251,7 +251,9 @@ namespace WebUI.Controllers
                     }
                     int beerindex = BeerId - 1;
                     order.SelectedBeer = beeros[beerindex];
+                    Debug.WriteLine("adding order");
                     _bl.AddOrder(order, custoid);
+                    Debug.WriteLine("Order added");
                     return RedirectToAction(nameof(Index));
                 }
                 return View();

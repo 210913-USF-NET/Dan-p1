@@ -25,8 +25,8 @@ namespace Mods
             } 
             set
             {
-                
-                if(value != 0)
+
+                if (value != 0)
                 {
                     _quantity = value;
                 }
@@ -45,7 +45,7 @@ namespace Mods
         { get; set; }
 
         public int CustomerIndex
-        {get; set;}
+        { get; set; }
 
         public int CustomerId
         { get; set; }
@@ -75,7 +75,7 @@ namespace Mods
 
         public override string ToString()
         {
-            return $" Date: {Date.ToString("MM/dd/yyyy")}  |   Customer Id: {CustomerIndex + 1} \n   |   Beer: {SelectedBeer.Name}-${SelectedBeer.Price}   |  Quantity: {Quantity}    |  Total: ${GetTotal()} \n";
+            return $" Date: {Date.ToString("MM/dd/yyyy")}  |   Customer Id: {CustomerId} \n   |   Beer: {SelectedBeer.Name}-${SelectedBeer.Price}   |  Quantity: {Quantity}    |  Total: ${GetTotal()} \n";
         }
         
     }

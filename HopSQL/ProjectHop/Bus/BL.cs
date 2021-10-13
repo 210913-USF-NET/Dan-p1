@@ -84,13 +84,13 @@ namespace Bus
 
             for (int i = 0; i < customers.Count; i++)
             {
-                if(customers[i].Code == customerid)
+                if (customers[i].Code == customerid)
                 {
-                    custoindex = i;
+                    custoindex = customers[i].Id;
                     break;
                 }
 
-                
+
             }
             return _repo.AddOrder(ordo, custoindex);
 
