@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bus;
 using Mods;
+using Serilog;
+
 namespace WebUI.Controllers
 {
     public class CustomerController : Controller
@@ -66,6 +68,8 @@ namespace WebUI.Controllers
 
             ViewData["IdAlert"] = "Id is " + Request.Cookies["IdCookie"];
             ViewData["NameAlert"] = "Name is " + Request.Cookies["NameCookie"];
+            Log.Information("Customer logged out");
+
             return View();
         }
 
@@ -99,6 +103,8 @@ namespace WebUI.Controllers
                     if (ModelState.IsValid)
                     {
                         _bl.AddCustomer(customer);
+                        Log.Information("New customer created");
+
                         return RedirectToAction(nameof(Index));
                     }
                     return View();
@@ -192,6 +198,9 @@ namespace WebUI.Controllers
 
                 ViewData["IdAlert"] = "Login Successful";
                 ViewData["NameAlert"] = "";
+
+                Log.Information("Customer logged in");
+
 
             }
             return View();

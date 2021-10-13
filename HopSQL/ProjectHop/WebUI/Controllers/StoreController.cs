@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Bus;
 using Mods;
 using System.Diagnostics;
+using Serilog;
 
 namespace WebUI.Controllers
 {
@@ -159,6 +160,8 @@ namespace WebUI.Controllers
                     Debug.WriteLine($"id = {Id}");
 
                     _bl.UpdateInventory(toadd, beertochange);
+                    Log.Information("Inventory updated");
+
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -254,6 +257,8 @@ namespace WebUI.Controllers
                     Debug.WriteLine("adding order");
                     _bl.AddOrder(order, custoid);
                     Debug.WriteLine("Order added");
+                    Log.Information("Order added");
+
                     return RedirectToAction(nameof(Index));
                 }
                 return View();
