@@ -9,72 +9,79 @@
 @*<p>
         <a asp-action="Create">Create New</a>
     </p>*@
-<table class="table">
-    @*<thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerIndex)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LineItemId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StoresId)
-                </th>
-                <th></th>
-            </tr>
-        </thead>*@
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @item.GetDateNoTime()
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerIndex)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LineItemId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StoresId)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>*@
-                <td>
-                    @item.ToString()
-                </td>
-            </tr>
-        }
-
-    </tbody>
-</table>
-@if (Model.Count() == 0)
+@if ((string)ViewData["Manager"] == "true")
 {
-    <p>No Orders to Show</p>
+    <table class="table">
+        @*<thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerIndex)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LineItemId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StoresId)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>*@
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @item.GetDateNoTime()
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerIndex)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LineItemId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StoresId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>*@
+                    <td>
+                        @item.ToString()
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @if (Model.Count() == 0)
+    {
+        <p>No Orders to Show</p>
+    }
+}
+else
+{
+    <h2>Manager Only Area</h2>
 }

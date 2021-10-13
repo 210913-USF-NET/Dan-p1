@@ -22,6 +22,7 @@ namespace WebUI.Controllers
         // GET: OrderController
         public ActionResult Index()
         {
+            ViewData["Manager"] = Request.Cookies["ManagerCookie"];
             List<Order> ordos = _bl.GetAllOrders();
 
             return View(ordos);

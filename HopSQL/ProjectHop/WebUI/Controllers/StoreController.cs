@@ -83,7 +83,7 @@ namespace WebUI.Controllers
                     stordos.Add(ord);
                 }
             }
-
+            ViewData["Manager"] = Request.Cookies["ManagerCookie"];
             return View("../Order/Index", stordos);
         }
        
@@ -137,7 +137,7 @@ namespace WebUI.Controllers
         {
            
             List<Beer> beero = _bl.GetAllBeers();
-
+            ViewData["Manager"] = Request.Cookies["ManagerCookie"];
             return View(beero[BeerId - 1]);
         }
 

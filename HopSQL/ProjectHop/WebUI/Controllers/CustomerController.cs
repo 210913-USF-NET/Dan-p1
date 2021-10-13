@@ -27,6 +27,8 @@ namespace WebUI.Controllers
 
         public ActionResult List()
         {
+
+            ViewData["Manager"] = Request.Cookies["ManagerCookie"];
             List<Customer> allCusto = _bl.GetAllCustomers();
             return View(allCusto);
             return View();
@@ -44,7 +46,7 @@ namespace WebUI.Controllers
                     custordos.Add(ord);
                 }
             }
-
+            ViewData["Manager"] = Request.Cookies["ManagerCookie"];
             return View("../Order/Index", custordos);
         }
 
@@ -60,6 +62,7 @@ namespace WebUI.Controllers
 
             Response.Cookies.Append("NameCookie", $"");
             Response.Cookies.Append("IdCookie", $"");
+            Response.Cookies.Append("ManagerCookie", $"");
 
             ViewData["IdAlert"] = "Id is " + Request.Cookies["IdCookie"];
             ViewData["NameAlert"] = "Name is " + Request.Cookies["NameCookie"];
@@ -126,6 +129,7 @@ namespace WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Customer customer)
         {
+            bool cman = false;
             bool NameExists = false;
             List<Customer> custos = _bl.GetAllCustomers();
             List<Customer> matches = new List<Customer>();
@@ -135,6 +139,7 @@ namespace WebUI.Controllers
                 {
                     NameExists = true;
                     matches.Add(custos[i]);
+                    System.Diagnostics.Debug.WriteLine($"custos bool = {custos[i].IsManager}");
                 }
             }
             bool IdMatch = false;
@@ -145,6 +150,11 @@ namespace WebUI.Controllers
                     if(matches[i].Code == customer.Code)
                     {
                         IdMatch = true;
+                        System.Diagnostics.Debug.WriteLine($"matches bool = {matches[i].IsManager}");
+                        if(matches[i].IsManager)
+                        {
+                            cman = true;
+                        }
                         break;
                     }
                 }
@@ -167,8 +177,21 @@ namespace WebUI.Controllers
                 Response.Cookies.Append("NameCookie", $"{customer.Name}");
                 Response.Cookies.Append("IdCookie", $"{customer.Code}");
 
-                ViewData["IdAlert"] = "Id is " + Request.Cookies["IdCookie"];
-                ViewData["NameAlert"] = "Name is " + Request.Cookies["NameCookie"];
+                if(cman)
+                {
+                    Response.Cookies.Append("ManagerCookie", $"true");
+                }
+                else
+                {
+                    Response.Cookies.Append("ManagerCookie", $"false");
+                }
+
+                
+                System.Diagnostics.Debug.WriteLine($"manager bool = {customer.IsManager}");
+                System.Diagnostics.Debug.WriteLine(Request.Cookies["ManagerCookie"]);
+
+                ViewData["IdAlert"] = "Login Successful";
+                ViewData["NameAlert"] = "";
 
             }
             return View();
