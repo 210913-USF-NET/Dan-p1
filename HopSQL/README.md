@@ -16,7 +16,7 @@
  * view list of stores
  * view list of beers
  * create an order
-  (manager can)
+ > manager can
   * view all customers
   * view all orders
   * restock inventory
