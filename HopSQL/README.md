@@ -1,7 +1,7 @@
-HOPCITY
+# HOPCITY
 -a web application for ordering beer
 
-Technologies used
+# Technologies used
  -C#
  -ASP.NET MVC
  -HTML5
@@ -10,7 +10,7 @@ Technologies used
  -xUnit Testing
  -Azure
  
- Features
+ # Features
  -create account
  -login
  -view list of stores
@@ -24,7 +24,7 @@ Technologies used
     -order multiple different beers at a time
     -sort orders by date or price
    
- Usage
+# Usage
  -click login then sign up
  -enter unique ID and username
  -sign in with username and ID
