@@ -16,11 +16,11 @@
  * view list of stores
  * view list of beers
  * create an order
-  manager can
+  (manager can)
   * view all customers
   * view all orders
   * restock inventory
-    To-do
+    # To-do
     * order multiple different beers at a time
     * sort orders by date or price
    
